@@ -1,34 +1,30 @@
-# Simple Calculator Function
+# JavaScript Execution Model
 
-## Functional Requirements
+## Predict the outcome of the following code
 
-The function must accept three parameters:
-
-- number1 (a number)
-- number2 (a number)
-- operation (a string)
-
-Supported operations:
-
-- "add"
-- "subtract"
-- "multiply"
-- "divide"
-
-The function must:
-
-- Perform the correct calculation based on the operation
-- Return the result
-- Return a helpful message if the operation is invalid
-- The function must not prompt the user or use the DOM.
-- All results must be displayed using console.log.
-
-Example usage:
+Try and understand the output before running it.
+Explain why it runs in this order.
 
 ```javascript
-calculate(10, 5, 'add'); // Outputs: 15
-calculate(10, 5, 'subtract'); // Outputs: 5
-calculate(10, 5, 'multiply'); // Outputs: 50
-calculate(10, 5, 'divide'); // Outputs: 2
-calculate(10, 5, 'power'); // Outputs: "Invalid operation"
+console.log('A');
+
+setTimeout(() => {
+  console.log('B');
+
+  Promise.resolve().then(() => {
+    console.log('C');
+  });
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log('D');
+});
+
+(async function () {
+  console.log('E');
+  await Promise.resolve();
+  console.log('F');
+})();
+
+console.log('G');
 ```
