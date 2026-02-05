@@ -1,6 +1,8 @@
-# Simple Calculator Function
+# Function and Closure
 
-## Functional Requirements
+## Simple Calculator Function
+
+### Exercise: Functional Requirements
 
 The function must accept three parameters:
 
@@ -32,3 +34,13 @@ calculate(10, 5, 'multiply'); // Outputs: 50
 calculate(10, 5, 'divide'); // Outputs: 2
 calculate(10, 5, 'power'); // Outputs: "Invalid operation"
 ```
+
+## Closure
+
+### Exercise: Create a Greeter Function
+
+Create a function called createGreeter that:
+
+1. Takes a greeting parameter (like "Hello" or "Hi")
+2. Returns a function that takes a name parameter
+3. The returned function should log the greeting + name
