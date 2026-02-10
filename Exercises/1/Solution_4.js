@@ -5,51 +5,50 @@
 // 3. Also prints a custom message for each day (e.g., "Monday - Start of the work week!")
 // 4. Test it with at least 3 different day values
 
-
-const determineDay = (day) => {
+const determineDay = day => {
     const normalizedDay = String(day).toLowerCase().trim();
     let type;
     let message;
 
     switch (normalizedDay) {
-        case "monday":
-            type = "Weekday";
-            message = "Monday - Start of the work week!";
+        case 'monday':
+            type = 'Weekday';
+            message = 'Monday - Start of the work week!';
             break;
-        case "tuesday":
-            type = "Weekday";
-            message = "Tuesday - Keep the momentum going!";
+        case 'tuesday':
+            type = 'Weekday';
+            message = 'Tuesday - Keep the momentum going!';
             break;
-        case "wednesday":
-            type = "Weekday";
-            message = "Wednesday - Halfway there!";
+        case 'wednesday':
+            type = 'Weekday';
+            message = 'Wednesday - Halfway there!';
             break;
-        case "thursday":
-            type = "Weekday";
-            message = "Thursday - Almost the weekend!";
+        case 'thursday':
+            type = 'Weekday';
+            message = 'Thursday - Almost the weekend!';
             break;
-        case "friday":
-            type = "Weekday";
-            message = "Friday - Wrap it up strong!";
+        case 'friday':
+            type = 'Weekday';
+            message = 'Friday - Wrap it up strong!';
             break;
-        case "saturday":
-            type = "Weekend";
-            message = "Saturday - Time to relax!";
+        case 'saturday':
+            type = 'Weekend';
+            message = 'Saturday - Time to relax!';
             break;
-        case "sunday":
-            type = "Weekend";
-            message = "Sunday - Rest and reset!";
+        case 'sunday':
+            type = 'Weekend';
+            message = 'Sunday - Rest and reset!';
             break;
         default:
-            type = "Invalid day";
+            type = 'Invalid day';
             message = `"${day}" is not a valid day.`;
             break;
     }
 
     console.log(type);
-    console.log(message + "\n");
+    console.log(message + '\n');
 };
 
-const testDays = ["Monday", "saturday", "Funday", "  Sunday", 4]
+const testDays = ['Monday', 'saturday', 'Funday', '  Sunday', 4];
 
 testDays.forEach(day => determineDay(day));

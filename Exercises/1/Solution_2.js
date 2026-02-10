@@ -23,4 +23,3 @@ const whileLoop = () => {
 
 forLoop();
 whileLoop();
-
