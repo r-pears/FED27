@@ -19,12 +19,9 @@
 // - The function must not prompt the user or use the DOM.
 // - All results must be displayed using console.log.
 
+import { isValidNumber } from "./helpers.js";
+
 const calculate = (number1, number2, operation) => {
-    const isValidNumber = value => {
-        if (value == null || value.toString().trim() === '') return false;
-        const num = Number(value);
-        return !isNaN(num) && isFinite(num);
-    };
 
     if (!isValidNumber(number1) || !isValidNumber(number2)) {
         console.log('Invalid input: both values must be valid numbers.');
