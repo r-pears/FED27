@@ -471,7 +471,15 @@ Given a list of items:
 // Add a single click event listener to the <ul> element
 // When any <li> is clicked, display the data-action value in #selected
 // Use event.target to determine which item was clicked
-// Your code here
+const byId = id => document.getElementById(id);
+const menu = byId('menu');
+const selected = byId('selected');
+
+menu.addEventListener("click", (e) => {
+    const liTarget = e.target.closest('li');
+    if (!liTarget) return;
+    selected.textContent = liTarget.dataset.action;
+});
 ```
 
 ## Event Delegation
@@ -491,7 +499,36 @@ Create a todo list where items can be added and removed:
 //    and a "Delete" button inside it
 // 2. Use event delegation on #todo-list to handle delete button clicks
 // 3. Clicking a delete button should remove its parent <li>
-// Your code here
+const byId = id => document.getElementById(id);
+const addBtn = byId('add-btn');
+const input = byId('todo-input');
+const list = byId('todo-list');
+
+addBtn.addEventListener('click', () => {
+    const inputText = input.value;
+    if (inputText === '') return;
+
+    const newLi = document.createElement('li');
+
+    const span = document.createElement('span');
+    span.textContent = inputText;
+    newLi.appendChild(span);
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Delete';
+    newLi.appendChild(deleteBtn);
+
+    list.appendChild(newLi);
+    input.value = '';
+});
+
+list.addEventListener('click', e => {
+    const clickedBtn = e.target.closest('button');
+    if (!clickedBtn) return;
+
+    list.removeChild(clickedBtn.parentElement);
+});
+
 ```
 
 ### Exercise: Table Row Selection
@@ -530,7 +567,18 @@ Given a table:
 // 3. Remove "selected" from any previously selected row
 // 4. Display "Selected ID: [data-id]" in #selected-row
 // 5. Ignore clicks on the header row
-// Your code here
+const byId = id => document.getElementById(id);
+const table = byId('data-table');
+const selected = byId('selected-row');
+const tbody = table.querySelector('tbody');
+
+table.addEventListener('click', e => {
+    const clickedRow = e.target.closest('tr');
+    if (!clickedRow || !tbody.contains(clickedRow)) return;
+    tbody.querySelectorAll('tr').forEach(row => row.classList.remove('selected'));
+    clickedRow.classList.add('selected');
+    selected.textContent = `Selected ID: ${clickedRow.dataset.id}`;
+});
 ```
 
 ## Preventing Default Behavior
@@ -548,7 +596,15 @@ Given a navigation link:
 // Prevent the default navigation and instead:
 // 1. Display "You tried to visit: [href]" in #link-message
 // 2. Change the link text to "Custom action performed!"
-// Your code here
+const byId = id => document.getElementById(id);
+const link = byId('custom-link');
+const msg = byId('link-message');
+
+link.addEventListener('click', e => {
+    e.preventDefault();
+    msg.textContent = `You tried to visit: ${link.getAttribute('href')}`;
+    link.textContent = 'Custom action performed!';
+});
 ```
 
 ### Exercise: Validate Before Submit
@@ -570,7 +626,30 @@ Given a form with validation requirements:
 // 2. Passwords don't match
 // Display appropriate error messages in #error
 // Only allow submission if validation passes
-// Your code here
+const byId = id => document.getElementById(id);
+const form = byId('registration');
+const passwordInput = byId('password');
+const confirmInput = byId('confirm');
+const error = byId('error');
+
+form.addEventListener('submit', e => {
+    const password = passwordInput.value;
+    const confirm = confirmInput.value;
+
+    if (password.length < 8) {
+        e.preventDefault();
+        error.textContent = 'Password must be at least 8 characters long.';
+        return;
+    }
+
+    if (password !== confirm) {
+        e.preventDefault();
+        error.textContent = "Passwords don't match.";
+        return;
+    }
+
+    error.textContent = '';
+});
 ```
 
 ## Event Propagation
@@ -595,7 +674,18 @@ Given nested elements:
 // 2. Each should log its name to #log (append, don't replace)
 // 3. Observe the bubbling behavior
 // 4. Then modify so clicking the button ONLY logs "Button" (stop propagation)
-// Your code here
+const byId = id => document.getElementById(id);
+const outer = byId('outer');
+const inner = byId('inner');
+const btn = byId('btn');
+const log = byId('log');
+
+[outer, inner, btn].forEach(el =>
+    el.addEventListener('click', function (e) {
+        e.stopPropagation();
+        log.textContent += e.target.id + '\n';
+    }),
+);
 ```
 
 ### Exercise: Capture vs Bubble
@@ -606,5 +696,25 @@ Using the same HTML structure above:
 // 1. Add event listeners in the CAPTURE phase for all three elements
 // 2. Log the order of events when clicking the button
 // 3. Compare with the bubbling phase order
-// Your code here
+const byId = id => document.getElementById(id);
+const outer = byId('outer');
+const inner = byId('inner');
+const btn = byId('btn');
+const log = byId('log');
+
+// capture outer => inner => btn
+[outer, inner, btn].forEach(el =>
+    el.addEventListener('click', function (e) {
+        e.stopPropagation
+        log.textContent += this.id + '\n';
+    }, { capture: true }),
+);
+
+// bubble btn => inner => outer
+[outer, inner, btn].forEach(el =>
+    el.addEventListener('click', function (e) {
+        e.stopPropagation
+        log.textContent += this.id + '\n';
+    }),
+);
 ```
