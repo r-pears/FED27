@@ -2,6 +2,9 @@
 // DEBUG CHALLENGE - Find and Fix All the JavaScript Errors!
 // ============================================================
 
+// NOTE that some errors may be syntax errors, while others may be logical errors. You might need to check the index.html file for some of the errors related to DOM manipulation.
+// Your task is to identify and correct each error to ensure the code runs smoothly. Good luck!
+
 // ERROR 1
 lte counter = 0;
 
