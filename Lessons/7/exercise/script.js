@@ -99,7 +99,7 @@ function resetCounter() {
     document.getElementById("counter-display").textContent = counter;
 }
 
-// ERROR 19
+// ERROR 19 -- There is no error in this one, its a setup for 20-21
 const users = [
     { name: "Alice", age: 30 },
     { name: "Bob", age: 25 },
